@@ -5,9 +5,14 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class GrupoDeHomens extends JFrame implements ActionListener{
-    JLabel lNome, lIdade, lEndereco, lFuncao;
+    JLabel lNome, lIdade, lEndereco, lFuncao, lEstado, lCidade;
     JTextField tfNome, tfIdade, tfEndereco, tfFuncao;  //referenciando as instâncias para construí-las mais abaixo
     JButton bSalvar, bLimpar, bSair;
+    String [] estado = {"", "Maranhão", "Piauí", "Ceará"};    
+    String[] ma = {"Imperatriz", "São Luís", "Estreito", "Porto Franco"};
+    String[] pi = {"Teresina", "Parnaíba", "Floriano", "Luis Correa"};
+    String[] ce = {"Crato", "Fortaleza", "Sobral", "Aurora"};
+    JComboBox cbEstado, cbCidade;
     
 public GrupoDeHomens(){ // método construtor
     setLayout(new FlowLayout());
@@ -17,15 +22,28 @@ public GrupoDeHomens(){ // método construtor
     lEndereco = new JLabel("Endereço"); //instanciando lEndereco
     lIdade = new JLabel("Idade");
     lFuncao = new JLabel("Função");
+    lEstado = new JLabel("Estado");
+    lCidade = new JLabel("Cidade");
     
-//instanciando os campos de texto
+//instanciando ComboBox
+    cbEstado = new JComboBox(estado);
+    cbCidade = new JComboBox();
+    
+//instanciando os campos de texto e adicionando Listener a eles
     tfNome = new JTextField(20);
+    tfNome.addActionListener(this);
     tfIdade = new JTextField(2);
+    tfIdade.addActionListener(this);
     tfEndereco = new JTextField(40);
+    tfEndereco.addActionListener(this);
     tfFuncao = new JTextField(15);
+    tfFuncao.addActionListener(this);
+    
+    
     
 
 //Adicionando objetos à frame, a sequencia define como eles se apresentarão nela
+     
     add(lNome); 
     add(tfNome);
     add(lIdade);
@@ -34,6 +52,10 @@ public GrupoDeHomens(){ // método construtor
     add(tfEndereco);
     add(lFuncao);
     add(tfFuncao);
+    add(lEstado);
+    add(cbEstado);
+    add(lCidade);
+    add(cbCidade);
     
 //instanciando os botões e adicionando-os    
     bSalvar = new JButton("Salvar");
@@ -70,6 +92,20 @@ public GrupoDeHomens(){ // método construtor
         }else
         if(ae.getSource()==bSair){
             System.exit(0);
+        }   
+        
+        if(ae.getSource()==tfNome){
+            tfIdade.requestFocus();
+        }else
+        if(ae.getSource()==tfIdade){
+            tfEndereco.requestFocus();
+        }else
+        if(ae.getSource()==tfEndereco){
+            tfFuncao.requestFocus();
+        }else
+        if(ae.getSource()==tfFuncao){
+            tfNome.requestFocus();
         }
+        
     }
 }
