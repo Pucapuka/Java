@@ -27,7 +27,9 @@ public GrupoDeHomens(){ // método construtor
     
 //instanciando ComboBox
     cbEstado = new JComboBox(estado);
+    cbEstado.addActionListener(this);
     cbCidade = new JComboBox();
+    cbCidade.addActionListener(this);
     
 //instanciando os campos de texto e adicionando Listener a eles
     tfNome = new JTextField(20);
@@ -89,6 +91,7 @@ public GrupoDeHomens(){ // método construtor
             tfIdade.setText("");
             tfEndereco.setText("");
             tfFuncao.setText("");
+            cbEstado.setSelectedIndex(0);
         }else
         if(ae.getSource()==bSair){
             System.exit(0);
@@ -107,5 +110,49 @@ public GrupoDeHomens(){ // método construtor
             tfNome.requestFocus();
         }
         
+        if (ae.getSource() == cbEstado){
+            if(cbEstado.getSelectedIndex()==0){
+                cbCidade.removeAllItems();
+            }else if (cbEstado.getSelectedIndex()==1){
+                cbCidade.removeAllItems();
+                for(int i=0; i<4; i++)
+                    cbCidade.insertItemAt(ma[i], i);
+            }else if (cbEstado.getSelectedIndex()==2){
+                cbCidade.removeAllItems();
+                for(int i=0; i<4; i++)
+                    cbCidade.insertItemAt(pi[i], i);
+            }else if (cbEstado.getSelectedIndex()==3){
+                cbCidade.removeAllItems();
+                for(int i=0; i<4; i++)
+                    cbCidade.insertItemAt(ce[i], i);
+            }
+           }       
+        if(ae.getSource()==cbCidade){
+           // if (cbCidade.getSelectedIndex()>0){
+           String estadoEscolhido = "";
+           String cidadeEscolhida = "";
+           int indexCidade;
+           indexCidade = cbCidade.getSelectedIndex();
+           
+           switch (cbEstado.getSelectedIndex()){
+               
+               case 1:
+                estadoEscolhido = "Maranhão";
+                cidadeEscolhida = ma[indexCidade];
+                break;
+               case 2:
+                estadoEscolhido = "Piauí";
+                cidadeEscolhida = pi[indexCidade];
+                break;
+               case 3:
+                estadoEscolhido = "Ceará";
+                cidadeEscolhida = ce[indexCidade];
+                break;
+           }
+           JOptionPane.showMessageDialog(this, cidadeEscolhida + ", " + estadoEscolhido);
+                     
+            }
+        }
     }
-}
+        
+        
