@@ -1,172 +1,180 @@
-package com.mycompany.prova2;
+package com.mycompany.prova;
 
-import java.awt.FlowLayout;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
+import java.awt.ScrollPane.*;
 
-public class Prova2 extends JFrame
-                    implements ActionListener{
-    JMenuBar menu;
+public class Prova extends JFrame 
+                   implements ActionListener{
+    
+//Declarando Objetos
+    JLabel lNome, lIdade, lSexo, lEndereco, lEstado, lCidade;
+    JTextField tfNome, tfIdade, tfEndereco;
+    JButton bGravar, bLimpar, bExcluir, bSair;
+    JRadioButton rbM, rbF;
+    ButtonGroup bg;
+    JCheckBox cbEditavel;
+    JComboBox cbEstado, cbCidade;
+    String[] est = {"", "Maranhão", "Piauí"};
+    String[] ma = {"Imperatriz", "São Luís"};  //estes já são declarados e instanciados
+    String[] pi = {"Parnaíba", "Terezina"};
+    JMenuBar barra;
     JMenu mArquivo;
     JMenuItem miSair;
-    JLabel lNome, lIdade, lEndereco;
-    JTextField tfNome, tfIdade, tfEndereco;
-    ButtonGroup bg;
-    JRadioButton rbM, rbF;
-    JComboBox cbEstado, cbCidade;
-    String[] estados = {"","Maranhão", "Piauí"};
-    String [] ma = {"Imperatriz", "São Luís"};
-    String [] pi = {"Parnaíba", "Terezina"};
-    JCheckBox Editavel;
-    JButton bGravar, bLimpar, bExcluir, bSair;
-    DefaultTableModel modelo;
     JTable tabela;
+    DefaultTableModel modelo;
     String [] colunas = {"Nome", "Idade", "Sexo", "Endereço", "Cidade", "Estado"};
     String [][] linhas = {{}};
     JScrollPane scroll;
     
-    public Prova2(){
-    setLayout(new FlowLayout());
-    //instanciando
-    lNome = new JLabel("Nome");
-    lIdade = new JLabel("Idade");
-    lEndereco = new JLabel("Endereço");
-    tfNome = new JTextField(30);
-    tfIdade = new JTextField(3); 
-    tfEndereco = new JTextField(30); 
-    bg = new ButtonGroup();
-    rbM = new JRadioButton("Masculino");
-    rbF = new JRadioButton("Feminino");
-    cbEstado = new JComboBox(estados);
-    cbCidade = new JComboBox();
-    Editavel = new JCheckBox("Editável");
-    bGravar = new JButton("Gravar");
-    bLimpar = new JButton("Limpar");
-    bSair = new JButton("Sair");
-    tabela = new JTable(linhas, colunas);
-    modelo = new DefaultTableModel(linhas, colunas);
-    scroll = new JScrollPane();
-    miSair = new JMenuItem("Sair");
-    bExcluir = new JButton("Excluir");
-    mArquivo = new JMenu("Arquivo");
-    menu = new JMenuBar();
     
-    //montando
-    miSair.addActionListener(this);
-    mArquivo.add(miSair);
-    menu.add(mArquivo);
-    setJMenuBar(menu);
-    add(lNome);
-    add(tfNome);
-    tfNome.addActionListener(this);
-    add(lIdade);
-    tfIdade.addActionListener(this);
-    add(tfIdade);
-    add(lEndereco);
-    tfEndereco.addActionListener(this);
-    add(tfEndereco);
-    rbM.addActionListener(this);
-    add(rbM);
-    rbF.addActionListener(this);
-    add(rbF);
-    bg.add(rbM);
-    bg.add(rbF);
-    cbEstado.addActionListener(this);
-    add(cbEstado);
-    cbCidade.addActionListener(this);
-    add(cbCidade);
-    Editavel.setSelected(true);
-    add(Editavel);
-    bGravar.addActionListener(this);
-    add(bGravar);
-    bLimpar.addActionListener(this);
-    add(bLimpar);
-    bExcluir.addActionListener(this);
-    add(bExcluir);
-    bSair.addActionListener(this);
-    add(bSair);
-    tabela.setModel(modelo);
-    add(tabela);
-    scroll.setViewportView(tabela);
-    add(scroll);
-    
-    
-    
-    
-    
-    
-    
-    setSize(620,400);
-    setVisible(true);
-    
+    public Prova(){
+      
+        //instanciando
+       setLayout(new FlowLayout());
+     
+       lNome = new JLabel("Nome");
+       lIdade = new JLabel("Idade");
+       lEndereco = new JLabel("Endereço");
+       lSexo = new JLabel("Sexo");
+       lEstado = new JLabel("Estado");
+       lCidade = new JLabel("Cidade");
+       tfNome = new JTextField(30);
+       tfIdade = new JTextField(3);
+       tfEndereco = new JTextField(40);
+       rbM = new JRadioButton("Masculino");
+       rbF = new JRadioButton("Feminino");
+       bg = new ButtonGroup();
+       cbEditavel = new JCheckBox("Editável");
+       cbEstado = new JComboBox(est);
+       cbCidade = new JComboBox();
+       barra = new JMenuBar();
+       mArquivo = new JMenu("Arquivo");
+       miSair = new JMenuItem("Sair");
+       bGravar = new JButton("Gravar");
+       bLimpar = new JButton ("Limpar");
+       bExcluir = new JButton ("Excluir");
+       bSair = new JButton ("Sair");
+       tabela = new JTable(linhas, colunas);
+       modelo = new DefaultTableModel(linhas, colunas);
+       scroll = new JScrollPane();
+       
+       //Características especiais
+       
+       mArquivo.setMnemonic('A');
+       miSair.setMnemonic('S');
+       miSair.addActionListener(this);
+       tfNome.addActionListener(this);
+       tfIdade.addActionListener(this);
+       cbEstado.addActionListener(this);
+       rbM.addActionListener(this);
+       rbF.addActionListener(this);
+       bSair.addActionListener(this);
+       bGravar.addActionListener(this);
+       bLimpar.addActionListener(this);
+       bExcluir.addActionListener(this);
+       cbEditavel.setSelected(true);
+       
+        //montando
+       
+       add(lNome);
+       add(tfNome);
+       add(lIdade);
+       add(tfIdade);
+       add(lSexo);
+       add(rbM);
+       add(rbF);
+       bg.add(rbM);
+       bg.add(rbF);
+       add(lEndereco);
+       add(tfEndereco);
+       add(lEstado);
+       add(cbEstado);
+       add(lCidade);
+       add(cbCidade);
+       add(cbEditavel);
+       add(bGravar);
+       add(bLimpar);
+       add(bExcluir);
+       add(bSair);
+       mArquivo.add(miSair);
+       barra.add(mArquivo);
+       setJMenuBar(barra);
+       tabela.setModel(modelo);
+       add(tabela);
+       scroll.setViewportView(tabela);
+       add(scroll);
+       
+        setSize(620,400);
+        setVisible(true);
+ 
     }
-  
-    
-    //função principal
     public static void main(String[] args) {
-        Prova2 a = new Prova2();
+        Prova a = new Prova();
         a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-    //Estabelecer as com o Action Event
-@Override
-    public void actionPerformed (ActionEvent ae){
-        if(ae.getSource()==tfNome){
-            tfIdade.requestFocus();
-        }else if(ae.getSource()==tfIdade){
-            tfEndereco.requestFocus();
-        }else
-        if(ae.getSource() == cbEstado){
-            cbCidade.removeAllItems();
-            if (cbEstado.getSelectedIndex()==1){
+    @Override
+    
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource()==cbEstado){
+            if(cbEstado.getSelectedIndex()==0){
+                String[] vazio = {""};
+                cbCidade.removeAllItems();
+                cbCidade.insertItemAt(vazio[0], 0);
+            }else if(cbEstado.getSelectedIndex()==1){
+                cbCidade.removeAllItems();
                 for (int i=0; i<ma.length; i++){
-                    cbCidade.insertItemAt(ma[i],i);
+                cbCidade.insertItemAt(ma[i], i);
                 }
-            }else if (cbEstado.getSelectedIndex()==2){
+            }else if(cbEstado.getSelectedIndex()==2){
                 cbCidade.removeAllItems();
                 for (int i=0; i<pi.length; i++){
-                    cbCidade.insertItemAt(pi[i],i);
+                cbCidade.insertItemAt(pi[i], i);
                 }
-            }else{
-                cbCidade.removeAllItems();
             }
         }
-          else if(ae.getSource()==bGravar){
-              if(tfNome.getText().length()<0){
-                  JOptionPane.showMessageDialog(null,
-                        "Campo nome vazio!");
-              }else{
-                  String sexo = "";
-                  if (rbM.isSelected()==true){
-                      sexo = "Masculino";
-                  }else if(rbF.isSelected()==true){
-                      sexo = "Feminino";
-                  }
-                  String [] texto = {tfNome.getText(), tfIdade.getText(),
-                                    sexo, tfEndereco.getText(), 
-                                    cbCidade.getSelectedItem().toString(),
-                                    cbEstado.getSelectedItem().toString()};
-            
-                        modelo.addRow(texto);
-              }
-          }else if(ae.getSource()==bExcluir){
-              
-              if (tabela.getSelectedRow()==-1){
-                  JOptionPane.showMessageDialog(null, "Uma linha deve ser selecionada.");
-              }else{
-                  modelo.removeRow(tabela.getSelectedRow());
-              }
-              
-          }else if(ae.getSource()==bLimpar){
-              tfNome.setText(null);
-              tfIdade.setText(null);
-              bg.clearSelection();
-              tfEndereco.setText(null);
-              cbEstado.setSelectedIndex(0);
-          }else if ((ae.getSource()==bSair) || (ae.getSource()==miSair)){
-                      System.exit(0);
-                      }
+        
+        if (ae.getSource()==miSair || ae.getSource()==bSair){
+            System.exit(0);
         }
+        
+        if (ae.getSource()== bGravar){
+            if (tfNome.getText().length()>0){
+                String sex = " ";
+                if (rbM.isSelected()==true){
+                    sex = "Masculino";
+                }else{
+                    sex = "Feminino";
+                }
+            String [] texto = {tfNome.getText(), tfIdade.getText(), sex, tfEndereco.getText(),
+                               cbCidade.getSelectedItem().toString(), cbEstado.getSelectedItem().toString()};
+            modelo.addRow(texto);
+            }else{
+                JOptionPane.showMessageDialog(null, "Campo em branco!");
+            
+            }
+    
+        }
+        
+        if (ae.getSource()==bExcluir){
+            if(tabela.getSelectedRow()==-1){
+                JOptionPane.showMessageDialog(null, "Selecione uma linha com conteúdo.");
+            }else{
+                modelo.removeRow(tabela.getSelectedRow());
+            }
+            
+        }
+        
+        if (ae.getSource()==bLimpar){
+            tfNome.setText(null);
+            tfIdade.setText(null);
+            tfEndereco.setText(null);
+            bg.clearSelection();
+            cbEstado.setSelectedIndex(0);
+        }
+    }
 }
