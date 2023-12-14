@@ -11,23 +11,20 @@ public class Main
         }
 
         //compara: se der igual, zera o valor do índice
+       
         for(int i=0; i<input.length; i++){
             unico = input[i];
-            for(int j=copia.length-1; j<i;j--){
-                if(copia[j]==unico)
+            for(int j=i+1; j<copia.length;j++){
+               System.out.print(copia[i]); 
+                if(copia[j]==unico){
                     copia[j] = 0;
-            }
+                    copia[i] = 0;
+                }
+                System.out.println(copia[i]);
+          }
         }
         
-        /*//compara: se der igual, zera o valor do índice
-        for(int i=0; i<input.length; i++){
-            unico = input[i];
-            for(int j=copia.length-1; j>=0;j--){
-                if(copia[j]==unico)
-                    copia[j] = 0;
-            }
-        }
-        */
+
         //procura o índice que não zerou, e guarda na variável único
         for (int i=0; i<copia.length; i++){
             if(copia[i]!=0)
@@ -44,7 +41,8 @@ public class Main
 
 
 	public static void main(String[] args) {
-		int lista[] = {101,10,20,30,40,50,50,40,30,20,101};
+		int lista[] = { 1,1,2,2,2,3,3};
+		
 		System.out.println(numeroUnico(lista));
 	}
 
